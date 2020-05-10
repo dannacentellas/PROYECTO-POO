@@ -1,17 +1,24 @@
-
-"""img  =  cv2 . imread ( 'buho.jpg' )
-filas , cols  =  img . forma
-
-M  =  cv2 . getRotationMatrix2D (( cols / 2 , filas / 2 ), 90 , 1 )
-dst  =  cv2 . warpAffine ( img , M , ( cols , filas ))"""
 import cv2
-import numpy as np
 from matplotlib import pyplot as plt
+from H1.ImageDisk import ImageDisk
 
-img = cv2.imread('buho.jpg',0)
-edges = cv2.Canny(img,100,200)
-plt.subplot(121),plt.imshow(img,cmap = 'gray')
-plt.title('Original Image'), plt.xticks([]), plt.yticks([])
-plt.subplot(122),plt.imshow(edges,cmap = 'gray')
-plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
-plt.show()
+
+def use_can(img):
+    edges = cv2.Canny(img, 100, 200)
+    return edges
+
+
+def mostrar_img(img, edges):
+    plt.subplot(121), plt.imshow(img, cmap='gray')
+    plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122), plt.imshow(edges, cmap='gray')
+    plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+    plt.show()
+
+
+if __name__ == '__PROYECTO__':
+    img_disk = ImageDisk()
+    img = img_disk.read_image('buho.jpg')
+    im_edges = use_can(img)
+    img_disk.save_img(img="img_canny", name_img="prueba2")
+    mostrar_img(img, im_edges)

@@ -1,3 +1,0 @@
-from tkinter import Image
-
-img=Image.open('buho.jpg')
