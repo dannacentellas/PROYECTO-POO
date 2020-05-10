@@ -1,0 +1,36 @@
+import cv2
+from matplotlib import pyplot as plt
+
+
+class ImageDisc:
+
+    @staticmethod
+    def read_image(path_img):
+        img = cv2.imread(path_img, 0)
+        return img
+    @staticmethod
+    def save_img(img, name_img):
+        name_img = name_img + ".jpg"
+        cv2.imwrite(name_img, img)
+
+
+def use_can(img):
+    edges = cv2.Canny(img, 100, 200)
+    return edges
+
+
+def mostrar_img(img, edges):
+    plt.subplot(121), plt.imshow(img, cmap='gray')
+    plt.title('imagen iniacial'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122), plt.imshow(edges, cmap='gray')
+    plt.title('Imagen con Canny'), plt.xticks([]), plt.yticks([])
+    plt.show()
+
+
+
+if __name__ == "__ej1__":
+
+    img = ImageDisc().read_image('buho.jpg')
+    im_edges = use_can(img)
+    ImageDisc().save_img(img="img_canny", name_img="prueba2")
+    mostrar_img(img, im_edges)
